@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PreAcademyD_Week6", "PreAcademyD_Week6\PreAcademyD_Week6.csproj", "{307F51FC-7908-4E4E-AA3D-C8C8745FDA11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PreAcademyD_Week6", "PreAcademyD_Week6\PreAcademyD_Week6.csproj", "{307F51FC-7908-4E4E-AA3D-C8C8745FDA11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProgettoProva", "ProgettoProva\ProgettoProva.csproj", "{6714305B-F332-4425-93FB-54F1EFC8B800}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProgettoProva", "ProgettoProva\ProgettoProva.csproj", "{6714305B-F332-4425-93FB-54F1EFC8B800}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azienda", "Azienda\Azienda.csproj", "{D6435560-38CD-4ECD-8140-A2A0FEA12428}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Azienda", "Azienda\Azienda.csproj", "{D6435560-38CD-4ECD-8140-A2A0FEA12428}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calcio", "Calcio\Calcio.csproj", "{5419111D-99B7-4751-9F95-A335064394BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Calcio", "Calcio\Calcio.csproj", "{5419111D-99B7-4751-9F95-A335064394BF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FigureGeometriche", "..\..\..\Documents\Accademy\_Documenti Utili\Arianna\Week6Pre-OOP\FigureGeometriche\FigureGeometriche.csproj", "{7B5B12F5-8CCD-4F6C-9ADD-22E0963D134F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ADO", "ADO\ADO.csproj", "{67247600-57F6-48B9-B916-334424883880}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{7B5B12F5-8CCD-4F6C-9ADD-22E0963D134F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B5B12F5-8CCD-4F6C-9ADD-22E0963D134F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B5B12F5-8CCD-4F6C-9ADD-22E0963D134F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{67247600-57F6-48B9-B916-334424883880}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67247600-57F6-48B9-B916-334424883880}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67247600-57F6-48B9-B916-334424883880}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67247600-57F6-48B9-B916-334424883880}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
