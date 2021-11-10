@@ -62,7 +62,7 @@ namespace ADO
             throw new NotImplementedException();
         }
 
-        public void ModificaDurataFilm(int idFilmDaModificare)
+        public void ModificaDurataFilm(int idFilmDaModificare, int nuovaDurata)
         {
             throw new NotImplementedException();
         }

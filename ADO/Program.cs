@@ -32,6 +32,8 @@ namespace ADO
                 Console.WriteLine("5. Cerca i film di un genere che hanno anche una durata maggiore di tot minuti");
                 Console.WriteLine("6. Stampare il numero di film nella videoteca");
                 Console.WriteLine("7. Inserisci un nuovo Film");
+                Console.WriteLine("8. Modifica durata di un Film");
+                Console.WriteLine("9. Elimina Film");
 
                 Console.WriteLine("0. Exit");
 
@@ -40,7 +42,7 @@ namespace ADO
                 do
                 {
                     Console.WriteLine("Scegli cosa fare!");
-                } while (!(int.TryParse(Console.ReadLine(), out scelta) && scelta >= 0 && scelta <= 7));
+                } while (!(int.TryParse(Console.ReadLine(), out scelta) && scelta >= 0 && scelta <= 9));
 
                 switch (scelta)
                 {
@@ -96,6 +98,35 @@ namespace ADO
                             Console.WriteLine("Valore errato. Riprova:");
                         }
                         db.InserisciFilm(t,g,d1);
+                        break;
+                    case 8:
+                        
+                        int idFilm, durataNuova;
+                        Console.WriteLine("Inserisci l'id del film da modificare");
+
+                        while (!(int.TryParse(Console.ReadLine(), out idFilm) && idFilm > 0))
+                        {
+                            Console.WriteLine("Valore errato. Riprova:");
+                        }
+
+                        Console.WriteLine("Inserisci la durata corretta");
+
+                        while (!(int.TryParse(Console.ReadLine(), out durataNuova) && durataNuova > 0))
+                        {
+                            Console.WriteLine("Valore errato. Riprova:");
+                        }
+
+                        db.ModificaDurataFilm(idFilm, durataNuova);
+                        break;
+                    case 9:
+                        int idFilmDaEliminare;
+                        Console.WriteLine("Inserisci l'id del film da eliminare");
+
+                        while (!(int.TryParse(Console.ReadLine(), out idFilmDaEliminare) && idFilmDaEliminare > 0))
+                        {
+                            Console.WriteLine("Valore errato. Riprova:");
+                        }
+                        db.EliminaFilm(idFilmDaEliminare);
                         break;
                     case 0:
                         continua = false;

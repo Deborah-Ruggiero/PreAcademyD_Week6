@@ -12,11 +12,7 @@ namespace ADO
     {
         const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Videoteca1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
-        public void EliminaFilm(int idFilmDaEliminare)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         public void GetAllFilms()
         {
            using(SqlConnection connection =new SqlConnection(connectionString))
@@ -188,9 +184,50 @@ namespace ADO
             }
         }
 
-        public void ModificaDurataFilm(int idFilmDaModificare)
+        public void ModificaDurataFilm(int idFilmDaModificare, int nuovaDurata)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "update Film set Durata=@Durata where FilmId=@Id";
+                command.Parameters.AddWithValue("@Id", idFilmDaModificare);
+                command.Parameters.AddWithValue("@Durata", nuovaDurata);               
+
+                int rigaInserita = command.ExecuteNonQuery();
+                if (rigaInserita == 1)
+                {
+                    Console.WriteLine("Durata aggiornata correttamente");
+                }
+                else
+                {
+                    Console.WriteLine("Errore.Non è stato possibile aggiornare la durata. Ricontrolla i dati inseriti!");
+                }
+            }
+        }
+        public void EliminaFilm(int idFilmDaEliminare)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "Delete Film where FilmId=@Id";
+                command.Parameters.AddWithValue("@Id", idFilmDaEliminare);                
+
+                int rigaInserita = command.ExecuteNonQuery();
+                if (rigaInserita == 1)
+                {
+                    Console.WriteLine("Film eliminato correttamente");
+                }
+                else
+                {
+                    Console.WriteLine("Errore.Non è stato possibile eliminare il Film. Ricontrolla i dati inseriti!");
+                }
+            }
         }
     }
 }

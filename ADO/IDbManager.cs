@@ -26,7 +26,7 @@ namespace ADO
         public void GetNumeroDiFilm();
         public void InserisciFilm(string titolo, string genre, int durata);
 
-        public void ModificaDurataFilm(int idFilmDaModificare);
+        public void ModificaDurataFilm(int idFilmDaModificare, int nuovaDurata);
         public void EliminaFilm(int idFilmDaEliminare);
     }
 }
