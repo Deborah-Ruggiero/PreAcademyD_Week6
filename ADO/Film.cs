@@ -12,5 +12,10 @@ namespace ADO
         public string Titolo { get; set; }
         public int Durata { get; set; }
         public string Genere { get; set; }
+
+        public override string ToString()
+        {
+            return $"{FilmId} - {Titolo} - Genere: {Genere} - Durata:{Durata}";
+        }
     }
 }

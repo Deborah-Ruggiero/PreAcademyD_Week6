@@ -14,8 +14,12 @@ namespace ADO
 
         // Far scegliere all'utente i soli generi presenti
         // oppure gestire se non trova film con il genere inserito
+
         static void Main(string[] args)
         {
+            //DbManagerMock db = new DbManagerMock();
+            DbManager db = new DbManager();
+
             Console.WriteLine("Benvenuto nella Videoteca!");
             bool continua = true;
             while (continua)
@@ -39,22 +43,25 @@ namespace ADO
                 switch (scelta)
                 {
                     case 1:
-                        StampaTuttiIFilm();
+                        Console.WriteLine("I Film presenti nella videoteca sono:\n");
+                        db.GetAllFilms();
                         break;
                     case 2:
-                        CercaFilmPerGenere();
+                        Console.WriteLine("Inserisci il genere da ricercare:\n");
+                        string genereScelto = Console.ReadLine();
+                        db.GetFilmByGenere(genereScelto);
                         break;
                     case 3:
-                        CercaFilmPerTitolo();
+                        
                         break;
                     case 4:
-                        CercaFilmPerDurataMinoreDi();
+                        
                         break;
                     case 5:
-                        CercaFilmPerGenereEDurataMaggioreDi();
+                        
                         break;
                     case 6:
-                        StampaNumeroFilm();
+                       
                         break;
                     case 0:
                         continua = false;
@@ -62,36 +69,5 @@ namespace ADO
                 }
             }
         }
-
-        private static void StampaNumeroFilm()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void CercaFilmPerGenereEDurataMaggioreDi()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void CercaFilmPerDurataMinoreDi()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void CercaFilmPerTitolo()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void CercaFilmPerGenere()
-        {
-            throw new NotImplementedException();
-        }
-
-        private static void StampaTuttiIFilm()
-        {
-            throw new NotImplementedException();
-        }
     }
-  
 }
