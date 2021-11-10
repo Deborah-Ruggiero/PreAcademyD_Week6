@@ -48,7 +48,6 @@ namespace Calcio
             {
                 return false;
             }
-
         }
     }
 }

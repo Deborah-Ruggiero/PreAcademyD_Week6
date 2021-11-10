@@ -45,6 +45,7 @@ namespace Calcio
             Portiere p1 = new Portiere("Gigi", "Buffon", 40);
             SquadraManager.AddCalciatore(p1, squadra1);
 
+            
         }
     }
 }

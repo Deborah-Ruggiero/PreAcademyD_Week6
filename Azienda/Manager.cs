@@ -10,6 +10,11 @@ namespace Azienda
     {
         public int BonusMensile { get; set; } = 1000;
 
+        public Manager(string nome, string cognome, string codiceFiscale)
+           : base(nome, cognome, codiceFiscale)
+        {
+
+        }
         public Manager(string nome, string cognome, string codiceFiscale, int pagaOraria)
             :base(nome, cognome, codiceFiscale, pagaOraria)
         {
