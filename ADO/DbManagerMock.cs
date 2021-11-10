@@ -13,6 +13,10 @@ namespace ADO
         new Film{ FilmId=2, Titolo="Peter Pan", Durata=60, Genere="Animazione" }
         };
 
+        public void EliminaFilm(int idFilmDaEliminare)
+        {
+            throw new NotImplementedException();
+        }
 
         public void GetAllFilms()
         {
@@ -49,6 +53,16 @@ namespace ADO
         }
 
         public void GetNumeroDiFilm()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void InserisciFilm(string titolo, string genere, int durata)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ModificaDurataFilm(int idFilmDaModificare)
         {
             throw new NotImplementedException();
         }

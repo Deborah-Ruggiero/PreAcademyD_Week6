@@ -24,5 +24,9 @@ namespace ADO
         /// <param name="durataMax"></param>
         public void GetFilmByDurataMax(int durataMax);
         public void GetNumeroDiFilm();
+        public void InserisciFilm(string titolo, string genre, int durata);
+
+        public void ModificaDurataFilm(int idFilmDaModificare);
+        public void EliminaFilm(int idFilmDaEliminare);
     }
 }

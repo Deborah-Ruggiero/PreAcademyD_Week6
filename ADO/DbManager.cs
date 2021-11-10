@@ -11,7 +11,12 @@ namespace ADO
     class DbManager : IDbManager
     {
         const string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Videoteca1;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        
+
+        public void EliminaFilm(int idFilmDaEliminare)
+        {
+            throw new NotImplementedException();
+        }
+
         public void GetAllFilms()
         {
            using(SqlConnection connection =new SqlConnection(connectionString))
@@ -40,25 +45,150 @@ namespace ADO
 
         public void GetFilmByDurataMax(int durataMax)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "select * from Film where Durata<@d";
+                command.Parameters.AddWithValue("@d", durataMax);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var id = reader["FilmId"];
+                    var genere = reader["Genere"];
+                    var titolo = reader["Titolo"];
+                    var durata = reader["Durata"];
+
+                    Console.WriteLine($"{id} - {titolo} - Genere: {genere} - Durata: {durata}");
+                }
+                connection.Close();
+            }
         }
 
         public void GetFilmByGenere(string genere)
         {
-            throw new NotImplementedException();
+            using(SqlConnection connection=new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "select * from Film where Genere=@g";
+                command.Parameters.AddWithValue("@g", genere);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var id = reader["FilmId"];
+                    var titolo = reader["Titolo"];
+                    var durata = reader["Durata"];
+
+                    Console.WriteLine($"{id} - {titolo} - Genere: {genere} - Durata: {durata}");
+                }
+                connection.Close();
+            }
         }
 
         public void GetFilmByGenereEDurataMin(string genere, int durataMin)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "select * from Film where Genere=@g and Durata>@d";
+                command.Parameters.AddWithValue("@g", genere);
+                command.Parameters.AddWithValue("@d", durataMin);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var id = reader["FilmId"];
+                    var titolo = reader["Titolo"];
+                    var durata = reader["Durata"];
+
+                    Console.WriteLine($"{id} - {titolo} - Genere: {genere} - Durata: {durata}");
+                }
+                connection.Close();
+            }
         }
+
 
         public void GetFilmByTitolo(string titolo)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "select * from Film where Titolo= @t";
+                command.Parameters.AddWithValue("@t", titolo);
+
+                SqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var id = reader["FilmId"];                    
+                    var gen = reader["Genere"];
+                    var durata = reader["Durata"];
+
+                    Console.WriteLine($"{id} - {titolo} - Genere: {gen} - Durata: {durata}");
+                }
+                connection.Close();
+            }
         }
 
         public void GetNumeroDiFilm()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "select count(*) from Film ";
+
+                int numFilm= (int)command.ExecuteScalar();
+                Console.WriteLine($"ci sono {numFilm} film nella videoteca");
+                connection.Close();
+            }
+        }
+
+
+        public void InserisciFilm(string titolo, string genere, int durata)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand();
+                command.Connection = connection;
+                command.CommandType = CommandType.Text;
+                command.CommandText = "insert into Film values( @Titolo, @Durata, @Genere)";                
+                command.Parameters.AddWithValue("@Titolo", titolo);
+                command.Parameters.AddWithValue("@Durata", durata);
+                command.Parameters.AddWithValue("@Genere", genere);
+
+                int rigaInserita=command.ExecuteNonQuery();
+                if (rigaInserita == 1)
+                {
+                    Console.WriteLine("Film inserito correttamente");
+                }
+                else
+                {
+                    Console.WriteLine("Errore.Non è stato possibile inserire il film");
+                }
+            }
+        }
+
+        public void ModificaDurataFilm(int idFilmDaModificare)
         {
             throw new NotImplementedException();
         }
