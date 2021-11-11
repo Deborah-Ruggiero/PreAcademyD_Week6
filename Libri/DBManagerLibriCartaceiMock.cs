@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libri
 {
-    public class DBManagerLibriCartaceiMock : IManager<LibroCartaceo>
+    public class DBManagerLibriCartaceiMock : IManagerLibroCartaceo
     {
         static List<LibroCartaceo> libriCartacei = new List<LibroCartaceo>()
         {
@@ -16,7 +16,16 @@ namespace Libri
 
         public bool Add(LibroCartaceo item)
         {
-            throw new NotImplementedException();
+            if (item != null)
+            {
+                var libroEsistente = GetByIsbn(item.ISBN);
+                if (libroEsistente == null)
+                {
+                    libriCartacei.Add(item);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<LibroCartaceo> GetAll()
@@ -34,6 +43,31 @@ namespace Libri
                 }
             }
             return null;
+        }
+
+        public LibroCartaceo GetByTitle(string titolo)
+        {
+            foreach (var item in libriCartacei)
+            {
+                if (item.Titolo == titolo)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public bool ModificaQuantità(LibroCartaceo libroModificato, int quantità)
+        {
+            foreach (var item in libriCartacei)
+            {
+                if (libroModificato.ISBN == item.ISBN)
+                {
+                    item.QuantitàInMagazzino = quantità;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

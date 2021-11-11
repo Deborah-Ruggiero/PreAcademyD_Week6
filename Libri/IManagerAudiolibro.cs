@@ -9,7 +9,7 @@ namespace Libri
     public interface IManagerAudiolibro: IManager<Audiolibro>
     {
         //vanno aggiunti il metodo specifico per gli audiolibri
-        public bool ModificaDurata(Audiolibro audioLibro);
+        public bool ModificaDurata(Audiolibro audioLibro, int durataModificata);
 
     }
 }

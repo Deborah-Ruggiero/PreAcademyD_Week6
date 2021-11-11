@@ -181,6 +181,7 @@ namespace ADO
                 {
                     Console.WriteLine("Errore.Non è stato possibile inserire il film");
                 }
+                connection.Close();
             }
         }
 
@@ -205,6 +206,7 @@ namespace ADO
                 {
                     Console.WriteLine("Errore.Non è stato possibile aggiornare la durata. Ricontrolla i dati inseriti!");
                 }
+                connection.Close();
             }
         }
         public void EliminaFilm(int idFilmDaEliminare)
@@ -227,6 +229,7 @@ namespace ADO
                 {
                     Console.WriteLine("Errore.Non è stato possibile eliminare il Film. Ricontrolla i dati inseriti!");
                 }
+                connection.Close();
             }
         }
     }

@@ -14,6 +14,7 @@ namespace Libri
 
         public bool Add(T item);
 
+        public T GetByTitle(string titolo);
 
     }
 }

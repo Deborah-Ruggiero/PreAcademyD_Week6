@@ -19,12 +19,14 @@ namespace Libri
         // Cercare per titolo tutti i film (Se inserisce un titolo gli viene mostrato sia il libro cartaceo che l'audiolibro)
         // Può inserire un nuovo libro cartaceo o audiolibro 
         // Nota:prima di inserirlo verificare che non sia già presente tramite codice ISBN
-        // due libri sono uguali se hanno lo stesso ISBN(cartecei e audiolibri NON hanno lo stesso ISBN)
+        // due libri sono uguali se hanno lo stesso ISBN(cartecei e audiolibri NON hanno lo stesso ISBN)--opzionale
 
         // Gestire il db sia in connected mode che i repository mock
 
-        private static DbManagerAudiolibriMock dbAudiolibro = new DbManagerAudiolibriMock();
-        private static DBManagerLibriCartaceiMock dbLibroCartaceo= new DBManagerLibriCartaceiMock();
+        //private static DBManagerAudiolibriMock dbAudiolibro = new DBManagerAudiolibriMock();
+        //private static DBManagerLibriCartaceiMock dbLibroCartaceo = new DBManagerLibriCartaceiMock();
+        private static DBManagerAudiolibri dbAudiolibro = new DBManagerAudiolibri();
+        private static DBManagerLibriCartacei dbLibroCartaceo = new DBManagerLibriCartacei();
         static void Main(string[] args)
         {
             
@@ -63,10 +65,12 @@ namespace Libri
                         break;
                     case 3:
                         //tutti gli audiolibri
+                        VisualizzaAudiolibri();
                         break;
                     case 4:
                         //Modifica Quantità di un libro cartaceo
                         //faccio visualizzare tutti i libri cartacei e poi faccio scegliere quale far modificare
+                        ModificaQuantitàLibroCartaceo();
                         break;
                     case 5:
                        
@@ -75,13 +79,7 @@ namespace Libri
                         
                         break;
                     case 7:
-                        
-                        break;
-                    case 8:
-                        
-                        break;
-                    case 9:
-                        
+                        InserisciNuovoLibro();
                         break;
                     case 0:
                         continua = false;
@@ -90,10 +88,86 @@ namespace Libri
             }
         }
 
+        private static void InserisciNuovoLibro()
+        {
+            Console.WriteLine("Quale libro vuoi inserire?");
+            Console.WriteLine("1. Libro Cartaceo");
+            Console.WriteLine("2. Audiolibro");
+            int scelta;
+            while (!(int.TryParse(Console.ReadLine(), out scelta) && scelta >= 1 && scelta <= 2))
+            {
+                Console.WriteLine("Errore. Riprova:");
+            }
+            switch (scelta)
+            {
+                case 1:
+                    //TODO: chiedo all'utente di inserire i dati che mi servono per creare un nuovo LibroCartaceo
+                    string titolo = "TitoloProva";
+                    string autore = "AutoreProva";
+                    int isbn = 1234;
+                    int numPagine = 100;
+                    int scorteInMagazzino = 3;
+
+                    var libroCartaceo = new LibroCartaceo(titolo, autore, isbn, numPagine, scorteInMagazzino);
+                    dbLibroCartaceo.Add(libroCartaceo);
+                    break;
+                case 2:
+                    break;
+            }
+        }
+
+        private static void ModificaQuantitàLibroCartaceo()
+        {
+            VisualizzaLibriCartacei();
+            Console.WriteLine("Quale Libro vuoi modificare? Inserisci l'isbn");
+            int librodaModificare;           
+
+            while (!(int.TryParse(Console.ReadLine(), out librodaModificare)))
+            {
+                Console.WriteLine("Valore errato. Riprova:");
+            }
+
+            var libroEsistente = dbLibroCartaceo.GetByIsbn(librodaModificare);
+            if (libroEsistente == null)
+            {
+                Console.WriteLine("Non esiste nessun audiolibro con questo isbn");
+            }
+            else
+            {
+                int quantità;
+                Console.WriteLine("Qual è la nuova quantità?");
+                while (!(int.TryParse(Console.ReadLine(), out quantità) && quantità>0))
+                {
+                    Console.WriteLine("Valore errato. Riprova:");
+                }                
+
+                bool esito = dbLibroCartaceo.ModificaQuantità(libroEsistente, quantità);
+                if (esito == true)
+                {
+                    Console.WriteLine("Modifica effettuata");
+                }
+                else
+                {
+                    Console.WriteLine("Errore generico");
+                }
+            }
+        }
+
+        private static void VisualizzaAudiolibri()
+        {
+            Console.WriteLine("Tutti gli Audiolibri presenti nella biblioteca sono:\n");
+            var audiolibri = dbAudiolibro.GetAll();
+            int numElenco = 1;
+            foreach (var item in audiolibri)
+            {
+                Console.WriteLine($"{numElenco++}. {item.ToString()}");
+            }
+        }
+
         private static void VisualizzaLibriCartacei()
         {
             Console.WriteLine("Tutti i Libri cartacei presenti nella biblioteca sono:\n");
-            List<LibroCartaceo> libriCartacei = dbLibroCartaceo.GetAll();
+            var libriCartacei = dbLibroCartaceo.GetAll();
             int numElenco = 1;
             foreach (var item in libriCartacei)
             {

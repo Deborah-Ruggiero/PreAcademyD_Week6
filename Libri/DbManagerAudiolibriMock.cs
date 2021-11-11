@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libri
 {
-    class DbManagerAudiolibriMock : IManagerAudiolibro
+    class DBManagerAudiolibriMock : IManagerAudiolibro
     {
         static List<Audiolibro> audiolibri = new List<Audiolibro>()
         {
@@ -16,7 +16,16 @@ namespace Libri
 
         public bool Add(Audiolibro item)
         {
-            throw new NotImplementedException();
+            if (item != null)
+            {
+                var libroEsistente = GetByIsbn(item.ISBN);
+                if (libroEsistente == null)
+                {
+                    audiolibri.Add(item);
+                    return true;
+                }
+            }
+            return false;
         }
 
         public List<Audiolibro> GetAll()
@@ -36,9 +45,29 @@ namespace Libri
             return null;
         }
 
-        public bool ModificaDurata(Audiolibro audioLibro)
+        public Audiolibro GetByTitle(string titolo)
         {
-            throw new NotImplementedException();
+            foreach (var item in audiolibri)
+            {
+                if (item.Titolo == titolo)
+                {
+                    return item;
+                }
+            }
+            return null;
+        }
+
+        public bool ModificaDurata(Audiolibro audioLibro, int durata)
+        {
+            foreach (var item in audiolibri)
+            {
+                if (audioLibro.ISBN == item.ISBN)
+                {
+                    item.DurataInMinuti = durata;
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

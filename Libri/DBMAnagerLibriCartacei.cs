@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libri
 {
-    class DBMAnagerLibriCartacei : IManager<LibroCartaceo>
+    class DBManagerLibriCartacei : IManagerLibroCartaceo
     {
         public bool Add(LibroCartaceo item)
         {
@@ -19,6 +19,16 @@ namespace Libri
         }
 
         public LibroCartaceo GetByIsbn(int isbn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public LibroCartaceo GetByTitle(string titolo)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ModificaQuantità(LibroCartaceo libroModificato, int quantità)
         {
             throw new NotImplementedException();
         }
