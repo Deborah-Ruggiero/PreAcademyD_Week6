@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libri
 {
-    class DbManagerAudiolibriMock : IManager<Audiolibro>
+    class DbManagerAudiolibriMock : IManagerAudiolibro
     {
         static List<Audiolibro> audiolibri = new List<Audiolibro>()
         {
@@ -34,6 +34,11 @@ namespace Libri
                 }
             }
             return null;
+        }
+
+        public bool ModificaDurata(Audiolibro audioLibro)
+        {
+            throw new NotImplementedException();
         }
     }
 }

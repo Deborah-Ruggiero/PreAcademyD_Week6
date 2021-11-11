@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Libri
 {
-    public class DBManagerAudiolibri : IManager<Audiolibro>
+    public class DBManagerAudiolibri : IManagerAudiolibro
     {
         public bool Add(Audiolibro item)
         {
@@ -19,6 +19,11 @@ namespace Libri
         }
 
         public Audiolibro GetByIsbn(int isbn)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ModificaDurata(Audiolibro audioLibro)
         {
             throw new NotImplementedException();
         }
