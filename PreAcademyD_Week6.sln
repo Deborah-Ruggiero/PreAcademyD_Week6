@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormeGeometriche", "FormeGe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Esercizietti", "Esercizietti\Esercizietti.csproj", "{30FAB866-2048-4B67-8567-0C9E57FB5407}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Libri", "Libri\Libri.csproj", "{D91F6E3F-F55C-456B-BC64-2345CDB07D4F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{30FAB866-2048-4B67-8567-0C9E57FB5407}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30FAB866-2048-4B67-8567-0C9E57FB5407}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30FAB866-2048-4B67-8567-0C9E57FB5407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D91F6E3F-F55C-456B-BC64-2345CDB07D4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D91F6E3F-F55C-456B-BC64-2345CDB07D4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D91F6E3F-F55C-456B-BC64-2345CDB07D4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D91F6E3F-F55C-456B-BC64-2345CDB07D4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
