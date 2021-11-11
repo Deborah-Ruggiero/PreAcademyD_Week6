@@ -20,7 +20,7 @@ namespace Libri
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "insert into dbo.Audiolibro values(@Titolo, @Autore, @isbn, @DurataMin)";
+                command.CommandText = "insert into dbo.Audiolibro values(@isbn, @Titolo, @Autore, @DurataMin)";
                 command.Parameters.AddWithValue("@Titolo", item.Titolo);
                 command.Parameters.AddWithValue("@Autore", item.Autore);
                 command.Parameters.AddWithValue("@isbn", item.ISBN);
@@ -57,7 +57,7 @@ namespace Libri
                     string titolo = (string)reader["Titolo"];
                     string autore = (string)reader["Autore"];
                     var isbn = (int)reader["ISBN"];
-                    var durataMinuti = (int)reader["DurataInMinuti"];
+                    var durataMinuti = (int)reader["DurataMinuti"];
 
                     Audiolibro al = new Audiolibro(titolo, autore, isbn, durataMinuti);
                     audiolibri.Add(al);
@@ -89,7 +89,7 @@ namespace Libri
                     string tit = (string)reader["Titolo"];
                     string autore = (string)reader["Autore"];
                     var isbn1 = (int)reader["ISBN"];
-                    var durataMinuti = (int)reader["DurataInMinuti"];
+                    var durataMinuti = (int)reader["DurataMinuti"];
 
                     audiolibro = new Audiolibro(tit, autore, isbn1, durataMinuti);
                 }
@@ -137,7 +137,7 @@ namespace Libri
                 SqlCommand command = new SqlCommand();
                 command.Connection = connection;
                 command.CommandType = System.Data.CommandType.Text;
-                command.CommandText = "update dbo.Audiolibro set DurataInMinuti = @DurataInMinuti where ISBN = @Isbn";
+                command.CommandText = "update dbo.Audiolibro set DurataMinuti = @DurataInMinuti where ISBN = @Isbn";
                 command.Parameters.AddWithValue("@Isbn", audioLibro.ISBN);
                 command.Parameters.AddWithValue("@DurataInMinuti", durataModificata);
 

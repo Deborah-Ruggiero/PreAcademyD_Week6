@@ -22,7 +22,7 @@ namespace Libri
 
         public override string ToString()
         {
-            return $"Titolo: {Titolo}\t Autore: {Autore} \t(Audiolibro)";
+            return $"ISBN{ISBN} - Titolo: {Titolo}\t Autore: {Autore} \tDurata(minuti)= {DurataInMinuti} \t(Audiolibro)";
         }
     }
 }

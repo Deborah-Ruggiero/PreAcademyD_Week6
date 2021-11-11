@@ -25,7 +25,7 @@ namespace Libri
 
         public override string ToString()
         {
-            return $"Titolo: {Titolo}\t Autore: {Autore}";
+            return $"ISBN{ISBN} - Titolo: {Titolo}\t Autore: {Autore}";
         }
 
     }

@@ -73,10 +73,10 @@ namespace Libri
                         ModificaQuantitàLibroCartaceo();
                         break;
                     case 5:
-                       
+                        ModificaDurataAudiolibro();
                         break;
                     case 6:
-                        
+                        CercaLibriPerTitolo();
                         break;
                     case 7:
                         InserisciNuovoLibro();
@@ -84,6 +84,59 @@ namespace Libri
                     case 0:
                         continua = false;
                         break;
+                }
+            }
+        }
+
+        private static void CercaLibriPerTitolo()
+        {
+            Console.WriteLine("Inserisci il titolo da ricercare:");
+            string titoloDaRicercare = Console.ReadLine();
+            var l1=dbAudiolibro.GetByTitle(titoloDaRicercare);
+            var l2=dbLibroCartaceo.GetByTitle(titoloDaRicercare);
+            List<Libro> libri = new List<Libro>();
+            libri.Add(l1);
+            libri.Add(l2);
+            Console.WriteLine("Ecco i libri(audiolibri/libri cartacei) corrispondenti al titolo inserito:");
+            foreach (var item in libri)
+            {
+                Console.WriteLine(item);
+            }
+        }
+
+        private static void ModificaDurataAudiolibro()
+        {
+            VisualizzaAudiolibri();
+            Console.WriteLine("Quale Libro vuoi modificare? Inserisci l'isbn");
+            int librodaModificare;
+
+            while (!(int.TryParse(Console.ReadLine(), out librodaModificare)))
+            {
+                Console.WriteLine("Valore errato. Riprova:");
+            }
+
+            var libroEsistente = dbAudiolibro.GetByIsbn(librodaModificare);
+            if (libroEsistente == null)
+            {
+                Console.WriteLine("Non esiste nessun audiolibro con questo isbn");
+            }
+            else
+            {
+                int durata;
+                Console.WriteLine("Qual è la nuova durata?");
+                while (!(int.TryParse(Console.ReadLine(), out durata) && durata > 0))
+                {
+                    Console.WriteLine("Valore errato. Riprova:");
+                }
+
+                bool esito = dbAudiolibro.ModificaDurata(libroEsistente, durata);
+                if (esito == true)
+                {
+                    Console.WriteLine("Modifica effettuata");
+                }
+                else
+                {
+                    Console.WriteLine("Errore generico");
                 }
             }
         }
@@ -101,17 +154,72 @@ namespace Libri
             switch (scelta)
             {
                 case 1:
-                    //TODO: chiedo all'utente di inserire i dati che mi servono per creare un nuovo LibroCartaceo
-                    string titolo = "TitoloProva";
-                    string autore = "AutoreProva";
-                    int isbn = 1234;
-                    int numPagine = 100;
-                    int scorteInMagazzino = 3;
+                    int isbn;
+                    Console.WriteLine("Inserisci ISBN");
+                    while(!(int.TryParse(Console.ReadLine(), out isbn) && isbn>0 && dbLibroCartaceo.GetByIsbn(isbn)==null))
+                    {
+                        Console.WriteLine("Formato errato e/o codice isbn già presente. Riprova");
+                    }
+                    Console.WriteLine("Inserisci titolo");
+                    string titolo = Console.ReadLine();
+                    Console.WriteLine("Inserisci autore");
+                    string autore = Console.ReadLine();
+                        
+                    int numPagine;
+                    Console.WriteLine("Inserisci numero pagine");
+                    while (!(int.TryParse(Console.ReadLine(), out numPagine) && numPagine > 0))
+                    {
+                        Console.WriteLine("Formato errato. Deve essere un intero. Riprova");
+                    }
+                    int scorteInMagazzino;
+                    Console.WriteLine("Inserisci scorte in magazzino");
+                    while (!(int.TryParse(Console.ReadLine(), out scorteInMagazzino) && scorteInMagazzino > 0))
+                    {
+                        Console.WriteLine("Formato errato. Deve essere un intero. Riprova");
+                    }
 
                     var libroCartaceo = new LibroCartaceo(titolo, autore, isbn, numPagine, scorteInMagazzino);
-                    dbLibroCartaceo.Add(libroCartaceo);
+                    bool esito=dbLibroCartaceo.Add(libroCartaceo);
+                    if (esito)
+                    {
+                        Console.WriteLine("Aggiunto correttamente");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Errore. Non è stato possibile aggiungere!");
+                    }
                     break;
                 case 2:
+                    
+                    int isbn1;
+                    Console.WriteLine("Inserisci ISBN");
+                    while (!(int.TryParse(Console.ReadLine(), out isbn1) && isbn1 > 0 && dbAudiolibro.GetByIsbn(isbn1)==null))
+                    {
+                        Console.WriteLine("Formato errato e/o codice isbn già presente. Riprova. Riprova");
+                    }
+                    Console.WriteLine("Inserisci titolo");
+                    string tit = Console.ReadLine();
+                    Console.WriteLine("Inserisci autore");
+                    string aut = Console.ReadLine();
+
+                    int durata;
+                    Console.WriteLine("Inserisci numero pagine");
+                    while (!(int.TryParse(Console.ReadLine(), out durata) && durata > 0))
+                    {
+                        Console.WriteLine("Formato errato. Deve essere un intero. Riprova");
+                    }
+                    
+                    var audiolibro = new Audiolibro(tit,aut,isbn1, durata);
+                    
+                    bool esito1 = dbAudiolibro.Add(audiolibro);
+                    if (esito1)
+                    {
+                        Console.WriteLine("Aggiunto correttamente");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Errore. Non è stato possibile aggiungere!");
+                    }
                     break;
             }
         }
@@ -130,7 +238,7 @@ namespace Libri
             var libroEsistente = dbLibroCartaceo.GetByIsbn(librodaModificare);
             if (libroEsistente == null)
             {
-                Console.WriteLine("Non esiste nessun audiolibro con questo isbn");
+                Console.WriteLine("Non esiste nessun libro cartaceo con questo isbn");
             }
             else
             {
